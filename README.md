@@ -29,6 +29,14 @@ make verify LOVE=/path/to/love LUA=/path/to/lua
 
 Use the repository as a GitHub template, then change the identity/title in `conf.lua` and replace `game/scenes/play.lua` with the first playable vertical slice.
 
+## Autonomous dev loop token optimization (built in)
+
+If you wire an autonomous cron/launchd dev loop onto a game generated from
+this skeleton, `scripts/compact_status.py` and `loop/pending_feedback.py`
+are already here — see `docs/TOKEN_OPTIMIZATION.md` for the three rules
+and how to hook them in before `docs/STATUS.md` / `loop/PROMPT.md` grow
+large enough to inflate every cycle's input tokens.
+
 ## Provenance
 
 This skeleton was distilled from reusable engine patterns in `man-of-korea`; it contains no story content, purchased assets, generated art, credentials, logs, or user data from that project.
