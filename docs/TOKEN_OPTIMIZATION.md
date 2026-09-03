@@ -29,5 +29,18 @@ matter:
    into the cycle's first prompt. It prints short titles only, capped at 4
    items, and tells the agent to read the source section for full text.
 
+4. **Move finished/blocked items out of `## 처리 대기` immediately
+   (2026-09-03).** `loop/PROMPT.md`'s workflow steps must include an
+   explicit rule: whenever a cycle judges a pending INBOX item fully done
+   (or fully human-gated — nothing left that code/assets/tests can do
+   until the user acts), move it out of `## 처리 대기` into
+   `## 처리 완료` in the same commit, with the completion evidence (or a
+   "human-gated: still waiting on <specific action>" note). Leaving a
+   finished item in the pending section just means every future cycle (and
+   any periodic progress-report cron reading the pending section) re-reads
+   and re-restates the same "still blocked" text — pure wasted tokens. See
+   `spaceship`/`man-of-korea`'s `loop/PROMPT.md` for the exact wording to
+   copy into new projects' `## ③ 규칙과 근거` / "Required workflow" section.
+
 See the Hermes skill `autonomous-loop-token-optimization` (any Hermes
 profile) for the full writeup, verification steps, and rationale.
