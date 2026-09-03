@@ -1,9 +1,9 @@
 # Autonomous final-asset generation & reporting (built in)
 
 Any game generated from this skeleton that produces final visual
-assets via an external service (SpriteCook, AetherAI, a local ComfyUI
-instance, etc.) inside its autonomous dev loop should follow this
-pattern, established 2026-09-03 across `man-of-korea` and `spaceship`:
+assets via an external service (SpriteCook, AetherAI, ComfyUI, etc.)
+inside its autonomous dev loop should follow this pattern, established
+2026-09-03 across `man-of-korea` and `spaceship`:
 
 ## 1. No permanent human-gate on asset generation
 
@@ -11,10 +11,14 @@ Do not have the loop stall indefinitely waiting for a human to
 manually log in, generate, and download an asset. Instead:
 
 - Prefer any source with a scriptable API the loop can drive directly
-  (a local ComfyUI instance's `/prompt` + `/history` + `/view` HTTP
-  API is the reference implementation — see
-  `tools/comfyui_asset_pipeline.py` in `spaceship` for a stdlib-only,
-  zero-extra-dependency example).
+  (a ComfyUI instance's `/prompt` + `/history` + `/view` HTTP API is
+  the reference implementation — see `tools/comfyui_asset_pipeline.py`
+  in `spaceship` for a stdlib-only, zero-extra-dependency example).
+  ComfyUI may run on `localhost` or on a remote GPU host; either way,
+  hardcode the current `COMFY_HOST`/`COMFY_URL` in the tool script and
+  keep old + new host prefixes in the asset-manifest verifier's
+  `OFFICIAL_SOURCE_PREFIXES` if the host ever moves, so already-applied
+  assets don't fail re-verification.
 - The loop's own agent + an automated QA check (readability at actual
   runtime scale, silhouette/identity match, no artifacts) is what
   decides whether a generated asset becomes final — not a human
