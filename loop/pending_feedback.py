@@ -118,3 +118,22 @@ def compact_inbox_status_notes(root: Path, inbox_relpath: str = "docs/feedback/I
     path.write_text(new_text, encoding="utf-8")
     print(f"[preflight] INBOX 처리 상황 주석 압축: -{len(original)-len(new_text):,} chars 절감", flush=True)
 
+
+def warn_large_source_files(root: Path, rels: tuple[str, ...] = ("game/self_test.lua", "game/scenes/play.lua"), min_bytes: int = 80_000) -> None:
+    """Print a TOKEN HINT for source files the agent must not full-read."""
+    hits = []
+    for rel in rels:
+        path = root / rel
+        try:
+            size = path.stat().st_size
+        except OSError:
+            continue
+        if size >= min_bytes:
+            hits.append(f"{rel} ({size // 1024}KB)")
+    if hits:
+        print(
+            "TOKEN HINT: these files are ≥80KB — search_files + offset/limit ≤80 lines, "
+            "never full read_file: " + ", ".join(hits),
+            flush=True,
+        )
+
