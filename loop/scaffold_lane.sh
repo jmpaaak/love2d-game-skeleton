@@ -71,6 +71,7 @@ LANE_LABEL="com.jm.${PROJECT_NAME}.${LANE_NAME}-lane"
   printf 'by other lanes, and do not edit `docs/feedback/INBOX.md` items outside\n'
   printf 'your scope (append-only status notes to your own item are fine).\n\n'
   printf '## Scope for this lane\n\n%s\n\n' "${SCOPE_DESC}"
+  printf '**중요 — 재감사 방지 규칙:** 이번 사이클에서 처리할 INBOX 항목이 이미 이전 사이클에서 완료됐다고 판단되면, STATUS.md 업데이트 없이 즉시 다음 미완료 항목으로 넘어가라. "이미 완료됐음을 재확인"하는 문서 커밋을 반복하지 않는다. 할 일이 없으면 IDLE로 종료한다.\n\n'
   printf '## Branch and push discipline\n\n'
   printf -- '- This lane commits and pushes ONLY to branch `%s`. Never push to\n' "${LANE_BRANCH}"
   printf '  `main`/`master` directly, never force-push.\n'
