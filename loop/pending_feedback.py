@@ -64,3 +64,53 @@ def compact_pending_feedback(pending: list[str], inbox_relpath: str = "docs/feed
     if omitted:
         shown.append(f"- ({omitted} more pending items omitted from this cycle prompt)")
     return header + shown
+
+
+def compact_inbox_status_notes(root: Path, inbox_relpath: str = "docs/feedback/INBOX.md", max_note_chars: int = 300) -> None:
+    """Collapse verbose '> 처리 상황 ...' note blocks in pending items to one line.
+
+    Each '> 처리 상황' block can grow to thousands of words across many cycles.
+    We keep only the first max_note_chars chars of the opening line, which carries
+    the essential 'what was done / what's next' summary. Call this from preflight
+    before running checks so every cycle starts with a compact INBOX.
+    Writes only when the file actually shrinks (no-op when already compact).
+
+    Usage in preflight.py:
+        from pending_feedback import compact_inbox_status_notes
+        compact_inbox_status_notes(root)
+    """
+    path = root / inbox_relpath
+    original = path.read_text(encoding="utf-8")
+    header, pend_marker, rest = original.partition("## 처리 대기")
+    if not pend_marker:
+        return
+    pending_section, done_marker, done_section = rest.partition("## 처리 완료")
+
+    lines = pending_section.splitlines(keepends=True)
+    out: list[str] = []
+    in_note = False
+    note_first_line = ""
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("> 처리 상황") or stripped.startswith(">  처리 상황"):
+            in_note = True
+            note_first_line = line.rstrip()[:max_note_chars]
+            continue
+        if in_note:
+            if stripped.startswith(">") or stripped == "":
+                continue
+            else:
+                out.append(note_first_line + " …(압축됨)\n")
+                in_note = False
+                out.append(line)
+        else:
+            out.append(line)
+    if in_note:
+        out.append(note_first_line + " …(압축됨)\n")
+
+    new_text = header + pend_marker + "".join(out) + done_marker + done_section
+    if len(new_text) >= len(original):
+        return
+    path.write_text(new_text, encoding="utf-8")
+    print(f"[preflight] INBOX 처리 상황 주석 압축: -{len(original)-len(new_text):,} chars 절감", flush=True)
+
