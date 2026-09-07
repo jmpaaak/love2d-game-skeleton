@@ -27,7 +27,7 @@ make verify LOVE=/path/to/love LUA=/path/to/lua
 
 ## Create a game
 
-Use the repository as a GitHub template, then change the identity/title in `conf.lua` and replace `game/scenes/play.lua` with the first playable vertical slice.
+Use the repository as a GitHub template, then change the identity/title in `conf.lua` and replace `game/scenes/play.lua` with the first playable vertical slice. Do **not** grow that scene into a god-file — new systems go in their own `game/*.lua` modules (`docs/MODULE_STRUCTURE.md`). INBOX items that don't share files should be worktree-parallelized to the maximum.
 
 ## Autonomous dev loop token optimization (built in)
 

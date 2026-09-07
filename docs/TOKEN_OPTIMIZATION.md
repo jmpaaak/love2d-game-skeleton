@@ -42,5 +42,12 @@ matter:
    `spaceship`/`man-of-korea`'s `loop/PROMPT.md` for the exact wording to
    copy into new projects' `## ③ 규칙과 근거` / "Required workflow" section.
 
+5. **No giant files / max-parallel INBOX (2026-09-07).** Copy
+   `docs/MODULE_STRUCTURE.md` into every derived game. Loop `PROMPT.md`
+   must forbid growing `play.lua`/`main.lua`/`self_test.lua` past 800 lines
+   or 80KB, and must tell the loop to worktree-parallelize non-overlapping
+   INBOX items (JSON/`tools/` immediately; scene god-files only after a
+   split). See `docs/PARALLEL_LANES.md`.
+
 See the Hermes skill `autonomous-loop-token-optimization` (any Hermes
 profile) for the full writeup, verification steps, and rationale.
