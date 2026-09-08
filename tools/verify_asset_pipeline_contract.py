@@ -23,7 +23,7 @@ REQUIRED_POLICY = (
     "reuse-compatible license",
     "URL, author, license, and hash provenance",
     "No unlicensed search-result copying.",
-    "Project-specific identity/source rules are stricter overrides",
+    "Project-specific identity, reference-licensing, likeness, palette, and runtime-rendering rules remain stricter safeguards.",
 )
 
 

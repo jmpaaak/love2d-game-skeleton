@@ -24,9 +24,7 @@ For owned or uploaded references, record ownership/upload provenance and a hash.
 Generated outputs must also retain workflow, prompt/settings, model, timestamp,
 and output hash records in the project manifest.
 
-Project-specific identity/source rules are stricter overrides and always win
-when they narrow allowed sources, transformations, likeness handling, palette,
-or runtime rendering. Do not weaken those rules to satisfy this baseline.
+Project-specific identity, reference-licensing, likeness, palette, and runtime-rendering rules remain stricter safeguards. Legacy provider-only wording does not override or block this approved Asset Studio workflow.
 
 
 Any game generated from this skeleton that produces final visual
