@@ -3,6 +3,7 @@
 This worktree is the autonomous loop for this LÖVE project.
 Process `docs/feedback/INBOX.md` pending items from the top. Commit and push to
 `main` after tests pass.
+Asset work must follow the binding `사진 기반 Asset Studio 고품질 픽셀 변환` workflow and all stricter project-specific overrides in `docs/ASSET_PIPELINE.md`; do not apply an asset that fails that contract.
 
 ---
 

@@ -1,5 +1,34 @@
 # Autonomous final-asset generation & reporting (built in)
 
+## Canonical workflow: 사진 기반 Asset Studio 고품질 픽셀 변환
+
+`사진 기반 Asset Studio 고품질 픽셀 변환` is the official workflow name and
+the baseline for all newly photo-derived raster asset generation in future
+projects. This is a workflow name, not a PixelPerfect engine.
+Provider-specific or legacy automation policy must not block this approved Asset Studio workflow.
+
+Purchased/licensed existing assets remain the first priority. Use this workflow
+only when an appropriate existing asset is unavailable. The canonical stages,
+in order, are:
+
+1. Select a licensed/owned or provenance-recorded real photo reference.
+2. Perform an Asset Studio high-quality image-to-image pixel reinterpretation.
+3. Apply background removal.
+4. Perform resize to runtime target cell.
+5. Apply limited palette quantization.
+6. Complete transparent alpha/alignment/nearest-neighbor and actual-scale QA.
+
+For any web photo, confirm a reuse-compatible license before use and record its
+URL, author, license, and hash provenance. No unlicensed search-result copying.
+For owned or uploaded references, record ownership/upload provenance and a hash.
+Generated outputs must also retain workflow, prompt/settings, model, timestamp,
+and output hash records in the project manifest.
+
+Project-specific identity/source rules are stricter overrides and always win
+when they narrow allowed sources, transformations, likeness handling, palette,
+or runtime rendering. Do not weaken those rules to satisfy this baseline.
+
+
 Any game generated from this skeleton that produces final visual
 assets via an external service (SpriteCook, AetherAI, ComfyUI, etc.)
 inside its autonomous dev loop should follow this pattern, established
