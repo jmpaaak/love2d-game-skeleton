@@ -9,6 +9,7 @@ Process `docs/feedback/INBOX.md` pending items from the top. Commit and push to
 # Autonomous development brief
 
 **중요 — 상시 구조화/모듈화/캡슐화, INBOX 기능보다 먼저 (2026-09-08):** 원본 `docs/MODULE_STRUCTURE.md`.
+- 리팩토링 사이클은 먼저 Hermes 스킬 `love2d-refactor-patterns`를 로드하고, 스캔 → 책임 하나 추출 → 기존 테스트 → 전체 참조 갱신 순서를 따른다.
 - 매 사이클 기능보다 **모듈 분리 리팩토링이 최우선**. 손대려는 파일이 800줄/80KB를 넘으면 그 사이클은 분리만. GREEN 전에 그 파일에 새 기능 금지.
 - `play.lua` / `self_test.lua` / `main.lua`를 더 키우지 마라. 슬라이스 = 모듈 1개. 순수 규칙과 씬 드로우를 섞지 마라.
 - INBOX 최상단이 기능이어도 거대 파일에 붙어야 하면 **먼저 쪼갠다**. 이미 독립 모듈 경로가 있는 항목만 기능 진행.
