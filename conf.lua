@@ -4,6 +4,13 @@ function love.conf(t)
 
     t.identity = "love2d-game-skeleton"
     t.version = "11.5"
+    if headless then
+        t.window = false
+        t.modules.audio = false
+        t.modules.window = false
+        t.modules.graphics = false
+        return
+    end
     t.window.title = "LÖVE2D Game Skeleton"
     t.window.width = 320 * scale
     t.window.height = 180 * scale
@@ -11,7 +18,4 @@ function love.conf(t)
     t.window.highdpi = true
     t.window.vsync = 1
     t.window.msaa = 0
-    t.modules.audio = not headless
-    t.modules.window = not headless
-    t.modules.graphics = not headless
 end

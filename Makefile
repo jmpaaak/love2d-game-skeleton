@@ -5,11 +5,13 @@ LOVE_PACKAGE ?= $(BUILD_DIR)/game.love
 
 .PHONY: test smoke love asset-contract verify clean
 
+HEADLESS_ENV = GAME_HEADLESS=1 SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy
+
 test:
-	GAME_HEADLESS=1 GAME_UNIT=1 $(LOVE) .
+	$(HEADLESS_ENV) GAME_UNIT=1 $(LOVE) .
 
 smoke:
-	GAME_HEADLESS=1 $(LOVE) .
+	$(HEADLESS_ENV) $(LOVE) .
 
 love:
 	@mkdir -p "$(BUILD_DIR)"
@@ -23,7 +25,7 @@ asset-contract:
 	python3 tools/verify_asset_pipeline_contract.py
 
 verify: asset-contract test smoke love
-	GAME_HEADLESS=1 $(LOVE) "$(LOVE_PACKAGE)"
+	$(HEADLESS_ENV) $(LOVE) "$(LOVE_PACKAGE)"
 	python3 tools/verify_bundle.py "$(LOVE_PACKAGE)"
 
 clean:
