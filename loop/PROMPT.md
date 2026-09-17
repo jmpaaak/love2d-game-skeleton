@@ -55,5 +55,5 @@ Asset work must follow the binding `사진 기반 Asset Studio 고품질 픽셀 
 - In a `*-lanes/*` worktree run only focused/targeted tests and the relevant build. Do not run the full repository suite there. After batching completed-lane integrations, the main checkout runs the full suite exactly once.
 - Keep long-running test output visible (`tee` is allowed); never fully redirect it to a file. The supervisor idle timeout is at least 720 seconds.
 - Preserve dirty lanes and any STOP whose first line contains `MANUAL`. On merge/rebase conflict, do not let the watchdog restart the lane; record the blocker and use a MANUAL STOP.
-- Reuse an existing lane branch/worktree instead of blindly recreating it. A successful worktree allocation is not proof of active work; verify the lane process and eventual tested commit.
+- Only dispatcher-managed lanes carry `loop/AUTO_RESUME`; the watchdog must never revive a legacy/unmanaged lane without that marker. Reuse an existing lane branch/worktree instead of blindly recreating it. A successful worktree allocation is not proof of active work; verify the lane process and eventual tested commit.
 
