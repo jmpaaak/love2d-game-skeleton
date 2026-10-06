@@ -6,6 +6,13 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 DOC = ROOT / "docs/ASSET_PIPELINE.md"
 PROMPT = ROOT / "loop/PROMPT.md"
+UI = ROOT / "docs/UI.md"
+UI_REQUIRED = (
+    "anti-slop-ui",
+    "One primary action per screen",
+    "Ban Inter + purple gradient",
+    "ASCII ellipsis",
+)
 WORKFLOW_NAME = "사진 기반 Asset Studio 고품질 픽셀 변환"
 REQUIRED_STAGES = (
     "licensed/owned or provenance-recorded real photo reference",
@@ -36,12 +43,13 @@ def main() -> int:
     doc_text = DOC.read_text(encoding="utf-8")
     missing_doc = missing_phrases(DOC, (WORKFLOW_NAME, *REQUIRED_STAGES, *REQUIRED_POLICY))
     missing_prompt = missing_phrases(PROMPT, ("docs/ASSET_PIPELINE.md", WORKFLOW_NAME))
+    missing_ui = missing_phrases(UI, UI_REQUIRED)
     stage_positions = [doc_text.find(stage) for stage in REQUIRED_STAGES]
     invalid_stage_order = -1 not in stage_positions and stage_positions != sorted(stage_positions)
-    if not missing_doc and not missing_prompt and not invalid_stage_order:
+    if not missing_doc and not missing_prompt and not missing_ui and not invalid_stage_order:
         print("asset pipeline source contract: PASS")
         return 0
-    for path, missing in ((DOC, missing_doc), (PROMPT, missing_prompt)):
+    for path, missing in ((DOC, missing_doc), (PROMPT, missing_prompt), (UI, missing_ui)):
         for phrase in missing:
             print(f"{path.relative_to(ROOT)}: missing required phrase: {phrase}", file=sys.stderr)
     if invalid_stage_order:

@@ -10,6 +10,7 @@ A small, tested foundation for landscape pixel games built with LÖVE 11.5.
 - bounded headless smoke mode
 - deterministic `.love` packaging with private/build-file exclusions
 - Lua unit tests and GitHub Actions CI
+- `docs/UI.md` anti-slop HUD contract (Hermes skill `anti-slop-ui`)
 
 ## Run
 
