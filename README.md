@@ -20,6 +20,10 @@ love .
 
 Move with WASD or arrow keys. Press Escape to quit.
 
+## Agent skills
+
+Load `karpathy-guidelines` before writing or reviewing code, and `verification-before-completion` before claiming tests pass or a commit is ready. Do not vendor Oxlint `install-anti-slop` here. Reply styles `attention-kind` / `spartan` / `rundown` apply only when asked.
+
 ## Verify
 
 ```bash

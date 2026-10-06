@@ -29,6 +29,10 @@ Asset work must follow the binding `사진 기반 Asset Studio 고품질 픽셀 
 2. `git status --short` first. Finish prior-cycle dirty work.
 3. If a target file is ≥800 lines / 80KB, split it this cycle. Do not add features to it.
 4. TDD. `make verify LOVE=/Users/jm/.local/bin/love` before commit.
+   Load `karpathy-guidelines` before writing/reviewing/refactoring code.
+   Load `verification-before-completion` and use that command output before claiming done.
+   Do not vendor Oxlint `install-anti-slop` into this Lua tree.
+   Reply styles `attention-kind` / `spartan` / `rundown` apply only when the user asks.
 5. STATUS.md this cycle only. Push when clean. Empty 처리 대기 = IDLE.
 
 ## 토큰 절약 규칙 (컨텍스트 관리)
